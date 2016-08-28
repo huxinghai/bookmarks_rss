@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  provision_id: MyString
+  parent_id: MyString
+  index: MyString
+  url: MyString
+  title: MyString
+  date_added: 
+  date_group_modified: 
+
+two:
+  provision_id: MyString
+  parent_id: MyString
+  index: MyString
+  url: MyString
+  title: MyString
+  date_added: 
+  date_group_modified: 
