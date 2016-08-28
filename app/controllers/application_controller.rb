@@ -8,7 +8,6 @@ class ApplicationController < ActionController::Base
  end
 
   def authenticate_user!
-    debugger
     if current_user.nil?
       respond_to do |format|
         format.json{ render json: {errors: ["unauthorized"]}, status: :unauthorized }

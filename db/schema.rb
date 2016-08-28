@@ -18,11 +18,11 @@ ActiveRecord::Schema.define(version: 20160828074210) do
     t.integer  "index"
     t.string   "url"
     t.string   "title"
-    t.integer  "date_added"
-    t.integer  "date_group_modified"
-    t.integer  "user_id",             null: false
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.integer  "date_added",          limit: 8
+    t.integer  "date_group_modified", limit: 8
+    t.integer  "user_id",                       null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
   end
 
   create_table "users", force: :cascade do |t|
