@@ -6,8 +6,8 @@ class CreateBookmarks < ActiveRecord::Migration[5.0]
       t.integer :index
       t.string :url
       t.string :title
-      t.double :date_added
-      t.double :date_group_modified
+      t.integer :date_added
+      t.integer :date_group_modified
       t.integer :user_id, null: false
 
       t.timestamps
