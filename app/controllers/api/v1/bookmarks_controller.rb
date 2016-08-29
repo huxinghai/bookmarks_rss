@@ -12,9 +12,16 @@ class Api::V1::BookmarksController < ApplicationController
     end
 
     if bookmarks.any?{|b| b.valid? }
-      render json: {}
+      head :ok
     else
       render json: {errors: "记录书签信息失败！"}, status: :unprocessable_entity
     end 
   end
+
+  def destroy
+    bookmark = Bookmark.find(params[:id])
+    bookmark.destroy
+    head :ok
+  end
+
 end
