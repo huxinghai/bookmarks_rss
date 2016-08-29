@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       scope constraints: ApiConstraints.new(version: 1.0, default: true) do
         resources :users, only: [:create]
-        resources :bookmarks, only: [:create]
+        resources :bookmarks, only: [:create, :destroy]
       end
     end
   end  

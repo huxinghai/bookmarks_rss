@@ -19,8 +19,8 @@ class Api::V1::BookmarksController < ApplicationController
   end
 
   def destroy
-    bookmark = Bookmark.find(params[:id])
-    bookmark.destroy
+    bookmark = Bookmark.find_by(provision_id: params[:id])
+    bookmark.destroy if bookmark 
     head :ok
   end
 
