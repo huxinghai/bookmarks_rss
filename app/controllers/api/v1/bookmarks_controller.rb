@@ -1,3 +1,5 @@
+require 'feed_crawler'
+
 class Api::V1::BookmarksController < ApplicationController
   before_action :authenticate_user!
 
@@ -5,6 +7,7 @@ class Api::V1::BookmarksController < ApplicationController
     data = params.require(:bookmarks)
     bookmarks = data.map do |param|
       options = param.permit(:provision_id, :parent_id, :index, :url, :title, :date_added, :date_group_modified)
+      url = FeedCrawler.fetch(options[:url])
       bookmark = current_user.bookmarks.find_or_initialize_by(provision_id: options[:provision_id])
       bookmark.assign_attributes(options)
       bookmark.save  
