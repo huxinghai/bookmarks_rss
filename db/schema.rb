@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160829143557) do
+ActiveRecord::Schema.define(version: 20160830135339) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.string   "provision_id"
@@ -23,6 +23,17 @@ ActiveRecord::Schema.define(version: 20160829143557) do
     t.integer  "user_id",                       null: false
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
+  end
+
+  create_table "site_infos", force: :cascade do |t|
+    t.string   "url"
+    t.string   "title"
+    t.string   "fovicon"
+    t.datetime "last_updated_at", default: '2016-08-30 13:57:06'
+    t.integer  "user_id"
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+    t.index ["url"], name: "index_site_infos_on_url", unique: true
   end
 
   create_table "users", force: :cascade do |t|
