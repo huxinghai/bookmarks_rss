@@ -11,6 +11,6 @@ class CreateSiteInfos < ActiveRecord::Migration[5.0]
       t.timestamps
     end
 
-    add_index :site_infos, :url, :unique => true
+    add_index :site_infos, [:url, :user_id], :unique => true
   end
 end

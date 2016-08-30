@@ -10,7 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160830135339) do
+ActiveRecord::Schema.define(version: 20160830140044) do
+
+  create_table "articles", force: :cascade do |t|
+    t.string   "link",                                    null: false
+    t.string   "title",        limit: 300,                null: false
+    t.datetime "published"
+    t.string   "author"
+    t.text     "description"
+    t.text     "content"
+    t.string   "guid"
+    t.integer  "user_id",                                 null: false
+    t.boolean  "status",                   default: true
+    t.integer  "site_info_id",                            null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.index ["title", "site_info_id"], name: "index_articles_on_title_and_site_info_id", unique: true
+  end
 
   create_table "bookmarks", force: :cascade do |t|
     t.string   "provision_id"
@@ -29,11 +45,12 @@ ActiveRecord::Schema.define(version: 20160830135339) do
     t.string   "url"
     t.string   "title"
     t.string   "fovicon"
-    t.datetime "last_updated_at", default: '2016-08-30 13:57:06'
+    t.datetime "last_updated_at", default: '2016-08-30 14:11:18'
     t.integer  "user_id"
+    t.boolean  "status",          default: true
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
-    t.index ["url"], name: "index_site_infos_on_url", unique: true
+    t.index ["url", "user_id"], name: "index_site_infos_on_url_and_user_id", unique: true
   end
 
   create_table "users", force: :cascade do |t|

@@ -10,8 +10,11 @@ class CreateArticles < ActiveRecord::Migration[5.0]
       t.string :guid
       t.integer :user_id, null: false
       t.boolean :status, default: true
+      t.integer :site_info_id, null: false
 
       t.timestamps
     end
+
+    add_index :articles, [:title, :site_info_id], :unique => true
   end
 end
