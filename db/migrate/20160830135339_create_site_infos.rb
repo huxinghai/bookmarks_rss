@@ -6,6 +6,7 @@ class CreateSiteInfos < ActiveRecord::Migration[5.0]
       t.string :fovicon
       t.datetime :last_updated_at, :default => Time.now
       t.integer :user_id
+      t.boolean :status, default: true
 
       t.timestamps
     end
