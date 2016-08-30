@@ -5,7 +5,7 @@ class Api::V1::BookmarksController < ApplicationController
 
   def create
     data = params.require(:bookmarks)
-    bookmarks = data.map do |param|
+    data.each do |param|
       options = param.permit(:provision_id, :parent_id, :index, :url, :title, :date_added, :date_group_modified)
       begin
         url = FeedCrawler.fetch(options[:url]) 
@@ -16,6 +16,7 @@ class Api::V1::BookmarksController < ApplicationController
           site_info.save!
 
           res[:items].each do |article|
+            Rails.logger.info("url: #{site_info.url}, user: #{current_user.id}, article: #{article}")
             article = site_info.articles.find_or_initialize_by(title: article[:title])
             article.assign_attributes(article.slice(:link, :published, :author, :description, :content, :guid))
             article.save!

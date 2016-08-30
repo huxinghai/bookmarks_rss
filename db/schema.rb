@@ -13,7 +13,7 @@
 ActiveRecord::Schema.define(version: 20160830140044) do
 
   create_table "articles", force: :cascade do |t|
-    t.string   "link",                                    null: false
+    t.string   "link"
     t.string   "title",        limit: 300,                null: false
     t.datetime "published"
     t.string   "author"

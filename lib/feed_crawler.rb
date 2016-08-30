@@ -9,17 +9,26 @@ class FeedCrawler
   end
 
   def search
-    doc = Nokogiri::HTML(open(@url))
-    item = doc.css("link[type='application/rss+xml']")[0]
-    return item.attributes["href"].value if item.present?
+    begin
+      doc = Nokogiri::HTML(open(@url))
+      item = doc.css("link[type='application/rss+xml']")[0]
+      if item.present?
+        href = item.attributes["href"].value
+        return href if href =~ URI::regexp
+      end
+    rescue Exception => e
+      Rails.logger.error("search url #{@url} error: #{e.message}")
+      nil
+    end
   end
-
 
   class << self
 
     def fetch(url)
-      @instance = self.new(url)
-      @instance.search
+      if url =~ URI::regexp
+        @instance = self.new(url)
+        @instance.search
+      end
     end
 
   end
