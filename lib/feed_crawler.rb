@@ -14,7 +14,7 @@ class FeedCrawler
       item = doc.css("link[type='application/rss+xml']")[0]
       if item.present?
         href = item.attributes["href"].value
-        return href if href =~ URI::regexp
+        return href if href =~ URI::regexp(['http', 'https'])
       end
     rescue Exception => e
       Rails.logger.error("search url #{@url} error: #{e.message}")
