@@ -6,10 +6,9 @@ class Api::V1::BookmarksController < ApplicationController
   def create
     data = params.require(:bookmarks)
     data.each do |param|
-      options = param.permit(:url) #:title, :date_added, :date_group_modified, :provision_id, :parent_id, :index
-      SiteInfo.crawler_articles(options[:url])
+      options = param.permit(:url, :date_added, :title, :date_group_modified, :provision_id, :parent_id, :index)
+      SiteInfo.enqueue_bookmark(current_user, options)
     end
-    
     head :ok
   end
 

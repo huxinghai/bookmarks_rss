@@ -22,7 +22,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'active_model_serializers', '~> 0.10.0.rc5'
 gem "feed_parser"
 gem 'nokogiri'
-
+gem 'delayed_job_active_record'
+gem 'daemons'
 
 group :development, :test do
   gem 'byebug', platform: :mri
