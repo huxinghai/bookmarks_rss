@@ -6,6 +6,7 @@ class SiteInfo < ApplicationRecord
 
   belongs_to :user
   has_many :articles, dependent: :destroy
+  has_many :bookmarks, dependent: :destroy
 
   validates :user, presence: true
 
@@ -27,6 +28,7 @@ class SiteInfo < ApplicationRecord
         site_info.title = res[:title]
         site_info.user = user
         site_info.save!
+
         res[:items].map do |art|
           Rails.logger.info("url: #{site_info.url}, article: #{art}")
           article = site_info.articles.find_or_initialize_by(link: art[:link])
@@ -40,11 +42,11 @@ class SiteInfo < ApplicationRecord
 
     def crawler_feed(rss_url)
       begin
-        rss_url.present? ? FeedParser.new(url: rss_url).parse.as_json : {}
+        return FeedParser.new(url: rss_url).parse.as_json if rss_url.present?
       rescue Exception => e
         Rails.logger.error("url: #{rss_url}, error: #{e.message}")
-        {}
       end
+      {}
     end
   end
 end

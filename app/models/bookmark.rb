@@ -1,3 +1,5 @@
+require 'uri'
+
 class Bookmark < ApplicationRecord
   belongs_to :user
   belongs_to :site_info
@@ -6,6 +8,8 @@ class Bookmark < ApplicationRecord
   validates :provision_id, presence: true, uniqueness: {scope: :user_id}
 
   after_create :update_user_last_date_added
+  after_destroy :destroy_domain_site_info
+
 
   class << self
 
@@ -20,5 +24,9 @@ class Bookmark < ApplicationRecord
   private
   def update_user_last_date_added
     user.update_attribute(:last_date_added, date_added) if date_added > user.last_date_added
+  end
+
+  def destroy_domain_site_info
+    site_info.destroy if URI.parse(url) == URI.parse(site_info.url)
   end
 end
