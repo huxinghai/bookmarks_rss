@@ -24,6 +24,7 @@ gem "feed_parser"
 gem 'nokogiri'
 gem 'delayed_job_active_record'
 gem 'daemons'
+gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
 
 group :development, :test do
   gem 'byebug', platform: :mri
