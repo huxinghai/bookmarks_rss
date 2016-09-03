@@ -16,22 +16,15 @@
 //= require semantic-ui
 //= require_tree .
 
+$(function(){
 
+  $(document).on('turbolinks:load', function(event) {
 
-$(document).on("ready", function() {
+    $('.menu').on("click", ".sidebar_toggle", function(){
+      $(".menu.sidebar").sidebar('toggle')
+    })
 
-  $(document).on('page:load', function(event) {
-    debugger    
   });
-
-  $(document).on('page:update', function(event) {
   
-
-    debugger
-  });
-
-  $('.menu').on("click", ".sidebar_toggle", function(){
-    $(".menu.sidebar").sidebar('toggle')
-  })
   
 })
