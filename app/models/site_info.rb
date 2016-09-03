@@ -6,6 +6,7 @@ class SiteInfo < ApplicationRecord
   attr_accessor :user
 
   has_and_belongs_to_many :users
+  has_many :site_infos_users
   has_many :articles, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
 
@@ -48,7 +49,6 @@ class SiteInfo < ApplicationRecord
           Rails.logger.info("url: #{site_info.url}, article: #{art}")
           article = Article.find_or_initialize_by(link: art[:link], site_info: site_info)
           article.assign_attributes(art.slice(:title, :link, :published, :author, :description, :content, :guid))
-          article.user = user
           article.save!
         end
         site_info

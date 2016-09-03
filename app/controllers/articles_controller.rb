@@ -1,7 +1,8 @@
 class ArticlesController < ApplicationController
 
   def index
-    @articles = current_user.articles.includes(:site_info).page(params[:page]).per(25)
+    @articles = Article.joins(:site_info).joins({site_info: :site_infos_users}).where(site_infos_users: {user_id: current_user.id})
+    @articles = @articles.page(params[:page]).per(25).eager_load(:site_info)
     @articles = @articles.where(site_info_id: params[:site_id]) if params[:site_id].present?
   end
 end

@@ -9,6 +9,4 @@ class User < ApplicationRecord
   has_many :bookmarks
   has_and_belongs_to_many :site_infos
   has_many :site_infos_users
-  has_many :articles_users
-  has_and_belongs_to_many :articles
 end

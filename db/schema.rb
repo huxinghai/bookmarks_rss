@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160903121546) do
+ActiveRecord::Schema.define(version: 20160903151004) do
 
   create_table "articles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC" do |t|
     t.string   "link"
@@ -25,12 +25,6 @@ ActiveRecord::Schema.define(version: 20160903121546) do
     t.datetime "created_at",                                null: false
     t.datetime "updated_at",                                null: false
     t.index ["title", "site_info_id"], name: "index_articles_on_title_and_site_info_id", unique: true, using: :btree
-  end
-
-  create_table "articles_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC" do |t|
-    t.integer "article_id"
-    t.integer "user_id"
-    t.index ["article_id", "user_id"], name: "index_articles_users_on_article_id_and_user_id", unique: true, using: :btree
   end
 
   create_table "bookmarks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC" do |t|
