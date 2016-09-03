@@ -1,0 +1,25 @@
+<div class="ui feed">
+  <% @articles.each do |article| %>
+  <div class="event">
+    <div class="label">
+      <img src="<%=article.site_info.favicon_url %>">
+    </div>
+    <div class="content">
+      <div class="summary">
+        <a href="<%=article.site_info.url %>"><%=article.site_info.title %></a> <%= article.title %>
+        <div class="date">
+          3 days ago
+        </div>
+      </div>
+      <div class="extra text">
+        <%=raw article.description  %>
+      </div>
+      <div class="meta">
+        <a href="<%=article.link %>" target="_blank" class="like">
+          <i class="send icon"></i>Like
+        </a>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
