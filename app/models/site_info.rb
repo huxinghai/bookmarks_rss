@@ -39,7 +39,7 @@ class SiteInfo < ApplicationRecord
       return if url.blank? || !url =~ URI::regexp(['http', 'https'])
       res = crawler_feed(FeedCrawler.fetch(url))
       if res.present?
-        site_info = SiteInfo.find_or_initialize_by(user: user, url: res[:url])
+        site_info = SiteInfo.find_or_initialize_by(url: res[:url])
         site_info.title = res[:title]
         site_info.user = user
         site_info.save!
@@ -60,8 +60,7 @@ class SiteInfo < ApplicationRecord
         return FeedParser.new(url: rss_url).parse.as_json if rss_url.present?
       rescue Exception => e
         Rails.logger.error("url: #{rss_url}, error: #{e.message}")
-      end
-      {}
+      end; {}
     end
   end
 end

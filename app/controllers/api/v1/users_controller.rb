@@ -1,5 +1,5 @@
-class Api::V1::UsersController < ApplicationController
-  skip_before_action :authenticate_user!
+class Api::V1::UsersController < Api::V1::BaseController
+  skip_before_action :authenticate_user!, only: [:create]
 
   def create
     options = params.require(:user).permit(:email, :provision_id)
@@ -9,8 +9,8 @@ class Api::V1::UsersController < ApplicationController
     else  
       user.provision_id = options[:provision_id]
     end
-    user.authenticity_token = session[:_csrf_token]
     user.last_sign_in_at = DateTime.now  
+    set_session_user(user)
     if user.save
       render json: user
     else

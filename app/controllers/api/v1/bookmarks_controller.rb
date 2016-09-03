@@ -1,8 +1,7 @@
 require 'feed_crawler'
 
-class Api::V1::BookmarksController < ApplicationController
-  before_action :authenticate_user!
-
+class Api::V1::BookmarksController < Api::V1::BaseController
+  
   def create
     data = params.require(:bookmarks)
     data.each do |param|
