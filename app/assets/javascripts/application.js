@@ -16,8 +16,22 @@
 //= require semantic-ui
 //= require_tree .
 
-$(function(argument) {
+
+
+$(document).on("ready", function() {
+
+  $(document).on('page:load', function(event) {
+    debugger    
+  });
+
+  $(document).on('page:update', function(event) {
+  
+
+    debugger
+  });
+
   $('.menu').on("click", ".sidebar_toggle", function(){
     $(".menu.sidebar").sidebar('toggle')
   })
+  
 })
