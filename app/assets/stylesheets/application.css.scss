@@ -19,3 +19,36 @@
 .menu>.container{
   width: 100%;
 }
+
+
+.pusher>.ui.container{
+  margin-top: 42px;
+}
+
+.ui.feed > .event{
+  display: block;
+  position: relative;
+  border-top: 1px solid rgba(34,36,38,.15);
+
+  &>.label{
+    display: inline-block;
+    position: absolute;
+    top: 8px;
+    left: 0;
+  }
+
+  &>.content{
+    padding-left: 35px;
+
+    .extra.text{
+      max-width: none;
+      width: 100%;   
+
+      img{
+        max-width: 100%; 
+      }   
+    }
+  }
+
+
+}

@@ -1,4 +1,5 @@
 require 'feed_crawler'
+require 'uri'
 
 class SiteInfo < ApplicationRecord
 
@@ -10,8 +11,9 @@ class SiteInfo < ApplicationRecord
   validates :url, uniqueness: { scope: :user_id }
 
   def favicon_url
-    "#{url}/favicon.ico"
-  end
+    uri = URI.parse(url)
+    "#{uri.scheme}://#{uri.hostname}/favicon.ico"
+  end  
 
   class << self
     def enqueue_bookmark(user, options = {})

@@ -25,11 +25,13 @@
     </div>
     <div class="ui sidebar inverted vertical menu">
       <% current_user.site_infos.each do |site| %>
-      <a class="item"><%=site.title %></a>
+      <a href="<%=user_path(current_user) %>?site_id=<%=site.id %>" class="item"><%=site.title %></a>
       <% end %>
     </div>
     <div class="pusher">
+      <div class="ui container">
       <%= yield %>
+      </div>
     </div>
     
   </body>
