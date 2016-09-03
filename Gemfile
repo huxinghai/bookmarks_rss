@@ -25,6 +25,7 @@ gem 'nokogiri'
 gem 'delayed_job_active_record'
 gem 'daemons'
 gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
+gem 'kaminari'
 
 group :development, :test do
   gem 'byebug', platform: :mri

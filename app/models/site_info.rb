@@ -2,13 +2,16 @@ require 'feed_crawler'
 
 class SiteInfo < ApplicationRecord
 
-  attr_accessor :__articles
-
   belongs_to :user
   has_many :articles, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
 
-  validates :user, presence: true
+  validates :user, :url, :title, presence: true
+  validates :url, uniqueness: { scope: :user_id }
+
+  def favicon_url
+    "#{url}/favicon.ico"
+  end
 
   class << self
     def enqueue_bookmark(user, options = {})
@@ -24,9 +27,8 @@ class SiteInfo < ApplicationRecord
       return if url.blank? || !url =~ URI::regexp(['http', 'https'])
       res = crawler_feed(FeedCrawler.fetch(url))
       if res.present?
-        site_info = self.find_or_initialize_by(url: res[:url])
+        site_info = self.find_or_initialize_by(user: user, url: res[:url])
         site_info.title = res[:title]
-        site_info.user = user
         site_info.save!
 
         res[:items].map do |art|
