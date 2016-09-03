@@ -13,4 +13,11 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require semantic-ui
 //= require_tree .
+
+$(function(argument) {
+  $('.menu').on("click", ".sidebar_toggle", function(){
+    $(".menu.sidebar").sidebar('toggle')
+  })
+})
