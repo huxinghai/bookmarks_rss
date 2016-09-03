@@ -1,6 +1,6 @@
 class CreateSiteInfos < ActiveRecord::Migration[5.0]
   def change
-    create_table :site_infos do |t|
+    create_table :site_infos, options: 'ROW_FORMAT=DYNAMIC' do |t|
       t.string :url
       t.string :title
       t.string :fovicon

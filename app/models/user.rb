@@ -7,6 +7,8 @@ class User < ApplicationRecord
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i}
 
   has_many :bookmarks
-  has_many :site_infos
-  has_many :articles
+  has_and_belongs_to_many :site_infos
+  has_many :site_infos_users
+  has_many :articles_users
+  has_and_belongs_to_many :articles
 end

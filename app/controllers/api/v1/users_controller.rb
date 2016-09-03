@@ -9,7 +9,7 @@ class Api::V1::UsersController < ApplicationController
     else  
       user.provision_id = options[:provision_id]
     end
-    user.authenticity_token = form_authenticity_token
+    user.authenticity_token = session[:_csrf_token]
     user.last_sign_in_at = DateTime.now  
     if user.save
       render json: user

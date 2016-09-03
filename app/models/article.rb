@@ -1,17 +1,15 @@
 class Article < ApplicationRecord
+  attr_accessor :user
 
-  belongs_to :user
+  has_and_belongs_to_many :users
   belongs_to :site_info
 
-  validates :user, :site_info, presence: true
+  validates :site_info, presence: true
 
-  before_validation(on: :create) do 
-    init_user
-  end
+  after_commit :create_articles_user, on: :create
 
   private 
-
-  def init_user
-    self.user_id = site_info.user_id
+  def create_articles_user
+    user.articles_users.find_or_create_by(article: self) if user
   end
 end

@@ -3,17 +3,27 @@ require 'uri'
 
 class SiteInfo < ApplicationRecord
 
-  belongs_to :user
+  attr_accessor :user
+
+  has_and_belongs_to_many :users
   has_many :articles, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
 
-  validates :user, :url, :title, presence: true
-  validates :url, uniqueness: { scope: :user_id }
+  validates :url, :title, presence: true
+  validates :url, uniqueness: true
+
+  after_commit :create_site_infos_user, on: :create
 
   def favicon_url
     uri = URI.parse(url)
     "#{uri.scheme}://#{uri.hostname}/favicon.ico"
   end  
+
+  private
+
+  def create_site_infos_user
+    user.site_infos_users.find_or_create_by(site_info: self) if user
+  end
 
   class << self
     def enqueue_bookmark(user, options = {})
@@ -29,16 +39,17 @@ class SiteInfo < ApplicationRecord
       return if url.blank? || !url =~ URI::regexp(['http', 'https'])
       res = crawler_feed(FeedCrawler.fetch(url))
       if res.present?
-        site_info = self.find_or_initialize_by(user: user, url: res[:url])
+        site_info = SiteInfo.find_or_initialize_by(user: user, url: res[:url])
         site_info.title = res[:title]
+        site_info.user = user
         site_info.save!
 
         res[:items].map do |art|
           Rails.logger.info("url: #{site_info.url}, article: #{art}")
-          article = site_info.articles.find_or_initialize_by(link: art[:link])
+          article = Article.find_or_initialize_by(link: art[:link], site_info: site_info)
           article.assign_attributes(art.slice(:title, :link, :published, :author, :description, :content, :guid))
+          article.user = user
           article.save!
-          article
         end
         site_info
       end

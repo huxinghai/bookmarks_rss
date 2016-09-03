@@ -1,6 +1,6 @@
 class CreateBookmarks < ActiveRecord::Migration[5.0]
   def change
-    create_table :bookmarks do |t|
+    create_table :bookmarks, options: 'ROW_FORMAT=DYNAMIC' do |t|
       t.string :provision_id
       t.string :parent_id
       t.integer :index
