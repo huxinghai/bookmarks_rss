@@ -18,6 +18,10 @@ class User < ApplicationRecord
     "room_#{id}"
   end
 
+  def badge_number
+    unread_articles.count
+  end
+
   def unread_articles
     Article.joins(:site_info).joins({site_info: :site_infos_users}).where("articles.created_at > ?", last_read_time).where(site_infos_users: {user_id: id})
   end
@@ -28,7 +32,7 @@ class User < ApplicationRecord
   end
 
   def send_notify
-    send_room_name_notify(unread_articles.count)
+    send_room_name_notify(badge_number)
   end
 
   private 
