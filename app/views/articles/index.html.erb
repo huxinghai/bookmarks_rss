@@ -7,9 +7,8 @@
     <div class="content">
       <div class="summary">
         <a href="<%=article.site_info.url %>"><%=article.site_info.title %></a> <%= article.title %>
-        <div class="date">
-          3 days ago
-        </div>
+        <time class="date timeago" title="<%=article.published %>" datetime="<%=article.published %>">
+        </time>
       </div>
       <div class="extra text">
         <%=raw article.description  %>

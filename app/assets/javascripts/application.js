@@ -14,18 +14,24 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require cable
+//= require jquery.timeago
 //= require semantic-ui
 //= require_tree .
 
 $(function(){
-  
+
   $(document).on('turbolinks:load', function(event) {
 
     $('.menu').on("click", ".sidebar_toggle", function(){
       $(".menu.sidebar").sidebar('toggle')
     })
 
+    $("time.timeago").timeago();
+
   });
+
+
+
   
   
 })

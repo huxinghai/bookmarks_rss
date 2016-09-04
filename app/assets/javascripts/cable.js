@@ -6,15 +6,15 @@
 //= require_tree ./channels
 
 (function() {
-  this.App || (this.App = {});
+  // this.App || (this.App = {});
 
-  App.cable = ActionCable.createConsumer();
+  // App.cable = ActionCable.createConsumer();
 
-  App.cable.subscriptions.create('ArticlesChannel', {
-    received: function(data){
-      debugger
-    }
-  })
+  // App.cable.subscriptions.create({channel: 'ArticlesChannel', room: ""}, {
+  //   received: function(data){
+      
+  //   }
+  // })
 
 
 }).call(this);
