@@ -10,4 +10,11 @@
 
   App.cable = ActionCable.createConsumer();
 
+  App.cable.subscriptions.create('ArticlesChannel', {
+    received: function(data){
+      debugger
+    }
+  })
+
+
 }).call(this);

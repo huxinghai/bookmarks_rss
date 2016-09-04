@@ -37,6 +37,8 @@ Rails.application.configure do
   # Raise an error on page load if there are pending migrations.
   config.active_record.migration_error = :page_load
 
+  config.action_cable.url = "ws://localhost:3000/cable"
+
   # Debug mode disables concatenation and preprocessing of assets.
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
@@ -44,6 +46,8 @@ Rails.application.configure do
 
   # Suppress logger output for asset requests.
   config.assets.quiet = true
+
+  config.action_cable.allowed_request_origins = ["chrome-extension://djogkbcmkpedfcndmjemdpchpbhkogpi", "http://localhost:3000"]
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true

@@ -5,6 +5,7 @@
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= action_cable_meta_tag %>
   </head>
 
   <body>
@@ -14,7 +15,7 @@
           <i class="content icon"></i>
         </a>
         <div class="item">
-          <%=current_user.email %>
+          <a href="<%=articles_path %>"><%=current_user.email %></a>
         </div>
         
         <div class="right menu">

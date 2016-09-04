@@ -11,4 +11,12 @@ class User < ApplicationRecord
   has_many :bookmarks
   has_and_belongs_to_many :site_infos
   has_many :site_infos_users
+
+  def room_name
+    "room_#{id}"
+  end
+
+  def send_noitify(opt = {})
+    ActionCable.server.broadcast("articles", {number: 99})
+  end
 end

@@ -13,11 +13,12 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require cable
 //= require semantic-ui
 //= require_tree .
 
 $(function(){
-
+  
   $(document).on('turbolinks:load', function(event) {
 
     $('.menu').on("click", ".sidebar_toggle", function(){

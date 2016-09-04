@@ -5,4 +5,9 @@ class ArticlesController < ApplicationController
     @articles = @articles.page(params[:page]).eager_load(:site_info)
     @articles = @articles.where(site_info_id: params[:site_id]) if params[:site_id].present?
   end
+
+  def show
+    ActionCable.server.broadcast("articles", {message: 1, user: 2})
+    render json: {}
+  end
 end

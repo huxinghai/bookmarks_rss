@@ -18,6 +18,7 @@ gem 'coffee-rails', '~> 4.2'
 
 gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
+gem 'redis'
 gem 'jbuilder', '~> 2.5'
 gem 'active_model_serializers', '~> 0.10.0.rc5'
 gem "feed_parser"
