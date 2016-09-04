@@ -12,6 +12,8 @@ class User < ApplicationRecord
   has_and_belongs_to_many :site_infos
   has_many :site_infos_users
 
+  before_create :init_data
+
   def room_name
     "room_#{id}"
   end
@@ -30,7 +32,11 @@ class User < ApplicationRecord
   end
 
   private 
+  def init_data
+    self.last_read_time = DateTime.now
+  end
+
   def send_room_name_notify(number = 0)
-    ActionCable.server.broadcast("articles_#{room_name}", {number: 99})
+    ActionCable.server.broadcast("notify_#{room_name}", {number: number})
   end
 end

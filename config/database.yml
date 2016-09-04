@@ -2,7 +2,8 @@
 
 defaults: &defaults
   adapter: mysql2
-  encoding: utf8
+  encoding: utf8mb4
+  collation: utf8mb4_bin
   pool: 5
   username: "<%=db['username'] %>"
   password: "<%=db['password'] %>"
@@ -21,5 +22,4 @@ test:
 production:
   <<: *defaults
   database: bookmark_rss_production
-  encoding: utf8mb4
   pool: 10

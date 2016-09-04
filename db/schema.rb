@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 20160904104610) do
 
-  create_table "articles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC" do |t|
+  create_table "articles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=DYNAMIC" do |t|
     t.string   "link"
     t.string   "title",        limit: 300,                  null: false
     t.datetime "published"
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20160904104610) do
     t.index ["title", "site_info_id"], name: "index_articles_on_title_and_site_info_id", unique: true, using: :btree
   end
 
-  create_table "bookmarks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC" do |t|
+  create_table "bookmarks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=DYNAMIC" do |t|
     t.string   "provision_id"
     t.string   "parent_id"
     t.integer  "index"
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20160904104610) do
     t.integer  "site_info_id"
   end
 
-  create_table "delayed_jobs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC" do |t|
+  create_table "delayed_jobs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=DYNAMIC" do |t|
     t.integer  "priority",                 default: 0, null: false
     t.integer  "attempts",                 default: 0, null: false
     t.text     "handler",    limit: 65535,             null: false
@@ -56,31 +56,31 @@ ActiveRecord::Schema.define(version: 20160904104610) do
     t.index ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
   end
 
-  create_table "site_infos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC" do |t|
+  create_table "site_infos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=DYNAMIC" do |t|
     t.string   "url"
     t.string   "title"
     t.string   "fovicon"
-    t.datetime "last_updated_at", default: '2016-09-03 13:56:15'
+    t.datetime "last_updated_at", default: '2016-09-04 12:27:11'
     t.boolean  "status",          default: true
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
     t.index ["url"], name: "index_site_infos_on_url_and_user_id", unique: true, using: :btree
   end
 
-  create_table "site_infos_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC" do |t|
+  create_table "site_infos_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=DYNAMIC" do |t|
     t.integer "site_info_id"
     t.integer "user_id"
     t.index ["site_info_id", "user_id"], name: "index_site_infos_users_on_site_info_id_and_user_id", unique: true, using: :btree
   end
 
-  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
     t.string   "email"
     t.string   "provision_id"
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.bigint   "last_date_added", default: 0
     t.datetime "last_sign_in_at"
-    t.datetime "last_read_time",  default: '2016-09-04 10:56:46'
+    t.datetime "last_read_time"
   end
 
 end
