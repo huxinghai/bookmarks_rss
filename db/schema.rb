@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160903151004) do
+ActiveRecord::Schema.define(version: 20160904104610) do
 
   create_table "articles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC" do |t|
     t.string   "link"
@@ -76,10 +76,11 @@ ActiveRecord::Schema.define(version: 20160903151004) do
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "email"
     t.string   "provision_id"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
     t.bigint   "last_date_added", default: 0
     t.datetime "last_sign_in_at"
+    t.datetime "last_read_time",  default: '2016-09-04 10:56:46'
   end
 
 end

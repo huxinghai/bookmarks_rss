@@ -16,7 +16,21 @@ class User < ApplicationRecord
     "room_#{id}"
   end
 
-  def send_noitify(opt = {})
-    ActionCable.server.broadcast("articles", {number: 99})
+  def unread_articles
+    Article.joins(:site_info).joins({site_info: :site_infos_users}).where("articles.created_at > ?", last_read_time).where(site_infos_users: {user_id: id})
+  end
+
+  def read_notify
+    self.update_attribute(:last_read_time, DateTime.now)
+    send_room_name_notify(0)
+  end
+
+  def send_notify
+    send_room_name_notify(unread_articles.count)
+  end
+
+  private 
+  def send_room_name_notify(number = 0)
+    ActionCable.server.broadcast("articles_#{room_name}", {number: 99})
   end
 end
