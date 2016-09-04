@@ -1,4 +1,4 @@
-<div class="ui feed">
+<div class="ui feed articles">
   <% @articles.each do |article| %>
   <div class="event">
     <div class="label">
@@ -22,4 +22,7 @@
     </div>
   </div>
   <% end %>
+  <div class='article_pages'>
+    <%= paginate @articles %>
+  </div>
 </div>

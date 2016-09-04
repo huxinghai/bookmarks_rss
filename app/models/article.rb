@@ -1,4 +1,5 @@
 class Article < ApplicationRecord
+  max_paginates_per 100
 
   belongs_to :site_info
 

@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  max_paginates_per 100
+  paginates_per 25
 
   attr_accessor :authenticity_token
 

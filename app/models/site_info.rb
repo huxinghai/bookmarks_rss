@@ -2,7 +2,9 @@ require 'feed_crawler'
 require 'uri'
 
 class SiteInfo < ApplicationRecord
-
+  max_paginates_per 100
+  paginates_per 25
+  
   attr_accessor :user
 
   has_and_belongs_to_many :users
