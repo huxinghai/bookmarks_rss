@@ -18,8 +18,7 @@ class FeedCrawler
       end
     rescue Exception => e
       Rails.logger.error("search url #{@url} error: #{e.message}")
-      nil
-    end
+    end; nil
   end
 
   class << self
