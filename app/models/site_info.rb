@@ -28,7 +28,7 @@ class SiteInfo < ApplicationRecord
       self.title = res[:title]
       self.last_updated_at = DateTime.now
       self.save!
-
+      
       res[:items].map do |art|
         Rails.logger.info("url: #{url}, article: #{art}")
         article = Article.find_or_initialize_by(link: art[:link], site_info: self)
