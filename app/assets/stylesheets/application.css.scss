@@ -25,6 +25,12 @@
   margin-top: 40px;
 }
 
+.ui.menu>.item{
+  .remove{
+    display: none;
+  }
+}
+
 .ui.sidebar{
   padding-top: 40px;
 }

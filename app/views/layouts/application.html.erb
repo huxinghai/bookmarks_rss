@@ -26,7 +26,9 @@
     </div>
     <div class="ui sidebar inverted vertical menu">
       <% current_user.site_infos.each do |site| %>
-      <a href="<%=articles_path %>?site_id=<%=site.id %>" class="item"><%=site.title %></a>
+      <a href="<%=articles_path %>?site_id=<%=site.id %>" class="item">
+        <%=site.title %><i href="<%=site_info_path(site) %>" data-title="<%=site.title %>" class="remove bookmark icon"></i>
+      </a>
       <% end %>
     </div>
     <div class="pusher">

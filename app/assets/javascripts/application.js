@@ -27,7 +27,6 @@ $(function(){
     })
 
     $("time.timeago").timeago();
-
   });
 
 
